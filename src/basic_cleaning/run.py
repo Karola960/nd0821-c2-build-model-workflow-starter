@@ -32,9 +32,11 @@ def go(args):
     dataframe['last_review'] = pd.to_datetime(dataframe['last_review'])
     logger.info("Fix last_review data")
 
+    logger.info("Fix longitude data")
+    
     idx = dataframe['longitude'].between(-74.25, -73.50) & dataframe['latitude'].between(40.5, 41.2)
     dataframe = dataframe[idx].copy()
-    logger.info("Fix longitude data")
+    
 
     artifact_path = os.path.join(args.tmp_directory, args.output_artifact)
     dataframe.to_csv(artifact_path)
